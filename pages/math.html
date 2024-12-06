@@ -1,2 +1,39 @@
 <h2>Math</h2>
-<p>This is the Math section. Here are some cool math projects and topics!</p>
+<p>Select a topic to explore:</p>
+<ul>
+    <li><a href="Darts.pdf">Cool Darts Problem</a></li>
+</ul>
+
+
+<div id="math-content">
+    <p>Click on a topic above to see more details.</p>
+</div>
+
+<script>
+    function loadMathContent(topic) {
+        const mathContentDiv = document.getElementById('math-content');
+
+        // Show a loading message while fetching content
+        mathContentDiv.innerHTML = "<p>Loading...</p>";
+
+        // Fetch the topic-specific content
+        fetch(`pages/math/${topic}.html`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Content not found');
+                }
+                return response.text();
+            })
+            .then(data => {
+                mathContentDiv.innerHTML = data; // Load the content into the div
+            })
+            .catch(error => {
+                mathContentDiv.innerHTML = "<p>Error loading content. Please try again later.</p>";
+            });
+        
+    function openPdfInBrowser(pdfUrl) {
+        // Open the PDF in a new browser tab
+        window.open(pdfUrl, '_blank');
+    }
+    }
+</script>
